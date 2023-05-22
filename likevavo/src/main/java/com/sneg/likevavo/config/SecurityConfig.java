@@ -1,7 +1,7 @@
 package com.sneg.likevavo.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.sneg.likevavo.service.UserDetailsServiceImpl;
 
-@Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfiguration {
 
@@ -29,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                 .defaultSuccessUrl("/hello", true).failureUrl("/login?error")).logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login"));
     }
     // Настройка аутентификации
+    @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder());
     }

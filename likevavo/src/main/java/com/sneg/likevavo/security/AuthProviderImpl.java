@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
@@ -16,9 +17,11 @@ import com.sneg.likevavo.service.UserDetailsServiceImpl;
 public class AuthProviderImpl implements AuthenticationProvider {
 
     private final UserDetailsServiceImpl UserDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
-    public AuthProviderImpl(UserDetailsServiceImpl UserDetailsService) {
+    public AuthProviderImpl(UserDetailsServiceImpl UserDetailsService, PasswordEncoder passwordEncoder) {
         this.UserDetailsService = UserDetailsService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -26,7 +29,8 @@ public class AuthProviderImpl implements AuthenticationProvider {
         String username = authentication.getName();
         UserDetails UserDetails = UserDetailsService.loadUserByUsername(username);
         String pass = authentication.getCredentials().toString();
-        if(!pass.equals(UserDetails.getPassword())){
+        String encodedpass = passwordEncoder.encode(pass);
+        if(encodedpass.equals(UserDetails.getPassword())){
             throw new BadCredentialsException("Wrong password");
         }
         return new UsernamePasswordAuthenticationToken(UserDetails, pass, Collections.emptyList());
