@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Search Aviatickets</title>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <style>
+            /* Add your CSS styles here */
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                font-family: 'Montserrat', sans-serif;
+            }
+            form {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                animation: fadeIn 1s ease-in-out;
+            }
+            input[type="text"], input[type="date"] {
+                margin-right: 10px;
+                padding: 7px 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                font-family: 'Montserrat', sans-serif;
+                background-color: #ffffff;
+                max-width: 190px;
+                border: 2px solid white;
+                border-radius: 5px;
+            }
+            input[type="text"]::placeholder, input[type="date"]::placeholder {
+                color: #ccc;
+                text-align: center;
+                font-size: 20px;
+                font-family: 'Montserrat', bold;
+            }
+            button[type="submit"] {
+                padding: 15px 15px;
+                border-radius: 10px;
+                border: none;
+                background-color: #ff521f;
+                color: #fff;
+                cursor: pointer;
+                font-family: 'Montserrat', bold;
+            }
+            button[type="submit"]:hover {
+                background-color: #ff7f50;
+            }
+            footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: #f5f5f5;
+                text-align: center;
+                padding: 10px;
+                font-size: 12px;
+            }
+            .form-container {
+                background-color: #0c73fe;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                padding: 15px;
+                margin: 0 auto;
+                max-width: 700px;
+            }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+            .input:focus {
+                color: rgb(172, 169, 169);
+                background-color: #ffffff;
+                outline-color: #ff6f32;
+                box-shadow: 3px -3px 5px #ff6f32;
+                transition: .1s;
+                transition-property: box-shadow;
+            }
+        </style>
+    </head>
+    <body>
+        <form class="form-container" method="post" th:action="@{/search}" onsubmit="return validateForm()">
+            <input type="text" id="from" name="from" placeholder="From" class="input" required list="originCities">
+            <datalist id="originCities">
+                <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+            </datalist>
+            <input type="text" id="to" name="to" placeholder="To" class="input" required list="destinationCities">
+            <datalist id="destinationCities">
+                <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+            </datalist>
+            <input type="date" id="date" name="date" placeholder="Date" class="input">
+            <button type="submit">Search flights</button>
+            <div id="error-message" class="error-message"></div>
+        </form>
+        <script>
+            function validateForm() {
+                var originAirportCity = document.getElementById("from").value;
+                var destinationAirportCity = document.getElementById("to").value;
+                var date = document.getElementById("date").value;
+
+                if (originAirportCity.trim() === "" || destinationAirportCity.trim() === "") {
+                    document.getElementById("error-message").innerHTML = "Please fill out all fields.";
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    </body>
+    <footer>
+        <a href="#">&copy; 2021 My Website</a>
+    </footer>
+</html>

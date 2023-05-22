@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Flight Search</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;700&display=swap');
+
+        body {
+            background-color: #f2f2f2;
+            font-family: 'Wix Madefor Display', sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        @media only screen and (min-width: 768px) {
+            form {
+                width: 70%;
+            }
+        }
+
+        @media only screen and (min-width: 992px) {
+            form {
+                width: 50%;
+            }
+        }
+
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        input, button {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flight Search</h1>
+    <form method="post" th:action="@{/search}" onsubmit="return validateForm()">
+        <label for="originAirportCity">Origin City:</label>
+        <input type="text" id="originAirportCity" name="originAirportCity" required list="originCities">
+        <datalist id="originCities">
+            <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+        </datalist>
+        
+        <label for="destinationAirportCity">Destination City:</label>
+        <input type="text" id="destinationAirportCity" name="destinationAirportCity" required list="destinationCities">
+        <datalist id="destinationCities">
+            <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+        </datalist>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date">
+        <button type="submit">Search</button>
+        <div id="error-message" class="error-message"></div>
+    </form>
+    <script>
+        function validateForm() {
+            var originAirportCity = document.getElementById("originAirportCity").value;
+            var destinationAirportCity = document.getElementById("destinationAirportCity").value;
+            var date = document.getElementById("date").value;
+
+            if (originAirportCity.trim() === "" || destinationAirportCity.trim() === "") {
+                document.getElementById("error-message").innerHTML = "Please fill out all fields.";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
+
+
+
+passenger 

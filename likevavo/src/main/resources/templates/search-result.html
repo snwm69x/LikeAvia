@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;700&display=swap');
+        body {
+            font-family: 'Wix Madefor Display', sans-serif;
+            background-color: #f2f2f2;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        th, td {
+            text-align: left;
+            padding: 12px;
+        }
+        
+        th {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search Results</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Origin City</th>
+                    <th>Destination City</th>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th>Avia Company</th>
+                    <th>Price</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="ticket : ${tickets}">
+                    <td th:text="${ticket.route.originAirport.city}"></td>
+                    <td th:text="${ticket.route.destinationAirport.city}"></td>
+                    <td th:text="${ticket.route.date}"></td>
+                    <td th:text="${ticket.quantity}"></td>
+                    <td th:text="${ticket.aviaCompany.name}"></td>
+                    <td th:text="${ticket.price}"></td>
+                    <td th:text="${ticket.departureTime}"></td>
+                    <td th:text="${ticket.arrivalTime}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
