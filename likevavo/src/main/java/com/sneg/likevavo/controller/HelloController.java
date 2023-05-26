@@ -18,6 +18,12 @@ public class HelloController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
         System.out.println(userDetails.getUser().getUsername());
+        System.out.println(userDetails.getUser().getRole());
         return "Hello";
+    }
+
+    @GetMapping("/admin")
+    public String adminPage(){
+        return "admin";
     }
 }

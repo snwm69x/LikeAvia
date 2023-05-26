@@ -1,8 +1,9 @@
 package com.sneg.likevavo.security;
 
 import java.util.Collection;
-
+import java.util.Collections;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.sneg.likevavo.entities.User;
@@ -17,7 +18,10 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority(this.user.getRole()));
+        // List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        // authorities.add(new SimpleGrantedAuthority(this.user.getRole()));      
+        // return authorities;
     }
 
     @Override
@@ -52,6 +56,10 @@ public class UserDetailsImpl implements UserDetails {
 
     public User getUser(){
         return this.user;
+    }
+
+    public String getRole(){
+        return this.user.getRole();
     }
     
 }

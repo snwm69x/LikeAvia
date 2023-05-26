@@ -84,16 +84,16 @@
     <h1>Flight Search</h1>
     <form method="post" th:action="@{/search}" onsubmit="return validateForm()">
         <label for="originAirportCity">Origin City:</label>
-        <input type="text" id="originAirportCity" name="originAirportCity" required list="originCities">
-        <datalist id="originCities">
+        <input type="text" id="originCity" name="originCity" required list="originCities">
+        <!-- <datalist id="originCities">
             <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
-        </datalist>
+        </datalist> -->
         
         <label for="destinationAirportCity">Destination City:</label>
-        <input type="text" id="destinationAirportCity" name="destinationAirportCity" required list="destinationCities">
-        <datalist id="destinationCities">
+        <input type="text" id="destinationCity" name="destinationCity" required list="destinationCities">
+        <!-- <datalist id="destinationCities">
             <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
-        </datalist>
+        </datalist> -->
         <label for="date">Date:</label>
         <input type="date" id="date" name="date">
         <button type="submit">Search</button>
@@ -101,8 +101,8 @@
     </form>
     <script>
         function validateForm() {
-            var originAirportCity = document.getElementById("originAirportCity").value;
-            var destinationAirportCity = document.getElementById("destinationAirportCity").value;
+            var originAirportCity = document.getElementById("from").value;
+            var destinationAirportCity = document.getElementById("to").value;
             var date = document.getElementById("date").value;
 
             if (originAirportCity.trim() === "" || destinationAirportCity.trim() === "") {
@@ -118,4 +118,3 @@
 
 
 
-passenger 

@@ -54,23 +54,23 @@
                     <th>Origin City</th>
                     <th>Destination City</th>
                     <th>Date</th>
-                    <th>Quantity</th>
-                    <th>Avia Company</th>
                     <th>Price</th>
                     <th>Departure Time</th>
                     <th>Arrival Time</th>
+                    <th>Duration Flight</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="ticket : ${tickets}">
-                    <td th:text="${ticket.route.originAirport.city}"></td>
-                    <td th:text="${ticket.route.destinationAirport.city}"></td>
-                    <td th:text="${ticket.route.date}"></td>
-                    <td th:text="${ticket.quantity}"></td>
-                    <td th:text="${ticket.aviaCompany.name}"></td>
-                    <td th:text="${ticket.price}"></td>
-                    <td th:text="${ticket.departureTime}"></td>
-                    <td th:text="${ticket.arrivalTime}"></td>
+                    <td th:text="${ticket.getRoute().getOriginAirport().getCity().getName()}"></td>
+                    <td th:text="${ticket.getRoute().getDestinationAirport().getCity().getName()}"></td>
+                    <td th:text="${ticket.getRoute().getDate()}"></td>
+                    <td th:text="${ticket.getPrice()}"></td>
+                    <td th:text="${ticket.getDepartureTime()}"></td>
+                    <td th:text="${ticket.getArrivalTime}"></td>
+                    <td th:text="${ticket.getDurationFlight()}"></td>
+                    <td th:text="${ticket.getAviaCompany().getName()}"></td>
                 </tr>
             </tbody>
         </table>

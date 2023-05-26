@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body>
+<!-- Form to input search parameters -->
+<form method="post" action="/search">
+    <label for="to">To:</label>
+    <input type="text" id="to" name="to" required>
+    <br>
+    <label for="from">From:</label>
+    <input type="text" id="from" name="from" required>
+    <br>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" required>
+    <br>
+    <button type="submit">Search</button>
+</form>
+
+<!-- Display search results -->
+<table>
+    <thead>
+        <tr>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Loop through the list of tickets and display each one -->
+        <th:block th:each="ticket : ${tickets}">
+            <tr>
+                <td th:text="${ticket.departureTime}"></td>
+                <td th:text="${ticket.arrivalTime}"></td>
+                <td th:text="${ticket.price}"></td>
+            </tr>
+        </th:block>
+    </tbody>
+</table>
+
+<!-- Display error message if no tickets are found -->
+<p th:text="${error}"></p>
+</body>
+
+

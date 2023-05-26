@@ -23,12 +23,22 @@ public class Route {
     @Column(name = "date", nullable = false)
     private LocalDate date;
     
+    @ManyToOne
+    @JoinColumn(name = "origin_city_id", nullable = false)
+    private City originCity;
+    
+    @ManyToOne
+    @JoinColumn(name = "destination_city_id", nullable = false)
+    private City destinationCity;
+    
     public Route() {}
     
-    public Route(Airport originAirport, Airport destinationAirport, LocalDate date) {
+    public Route(Airport originAirport, Airport destinationAirport, LocalDate date, City originCity, City destinationCity) {
         this.originAirport = originAirport;
         this.destinationAirport = destinationAirport;
         this.date = date;
+        this.originCity = originCity;
+        this.destinationCity = destinationCity;
     }
     
     // getters and setters
@@ -63,5 +73,21 @@ public class Route {
     
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+    
+    public City getOriginCity() {
+        return originCity;
+    }
+    
+    public void setOriginCity(City originCity) {
+        this.originCity = originCity;
+    }
+    
+    public City getDestinationCity() {
+        return destinationCity;
+    }
+    
+    public void setDestinationCity(City destinationCity) {
+        this.destinationCity = destinationCity;
     }
 }

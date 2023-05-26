@@ -23,7 +23,10 @@ public class User {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
+    private Role roleclass;
+
+    @Column(name = "role", length = 100)
+    private String role;
     
     public User() {}
     
@@ -69,11 +72,12 @@ public class User {
         this.password = password;
     }
     
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
-    
-    public void setRole(Role role) {
+
+    public void setRole(String role) {
         this.role = role;
     }
+
 }
