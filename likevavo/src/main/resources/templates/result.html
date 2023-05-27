@@ -43,6 +43,19 @@
             margin: 0 auto;
             padding: 20px;
         }
+        
+        .book-ticket-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -70,7 +83,12 @@
                     <td th:text="${ticket.getDepartureTime()}"></td>
                     <td th:text="${ticket.getArrivalTime}"></td>
                     <td th:text="${ticket.getDurationFlight()}"></td>
-                    <td th:text="${ticket.getAviaCompany().getName()}"></td>
+                    <td>
+                        <form action="/book-ticket" method="post">
+                            <input type="hidden" name="ticketId" th:value="${ticket.getId()}"/>
+                            <button type="submit" class="book-ticket-btn">Book Ticket</button>
+                        </form>
+                    </td>
                 </tr>
             </tbody>
         </table>

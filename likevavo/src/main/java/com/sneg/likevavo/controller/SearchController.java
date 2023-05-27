@@ -3,6 +3,8 @@ package com.sneg.likevavo.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.swing.text.html.Option;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sneg.likevavo.entities.City;
 import com.sneg.likevavo.entities.Ticket;
+import com.sneg.likevavo.service.OptionsService;
 import com.sneg.likevavo.service.SearchService;
 
 
@@ -19,13 +23,18 @@ import com.sneg.likevavo.service.SearchService;
 public class SearchController {
     
     private final SearchService searchService;
+    private final OptionsService optionsService;
 
-    public SearchController(SearchService searchService) {
+    public SearchController(SearchService searchService, OptionsService optionsService) {
         this.searchService = searchService;
+        this.optionsService = optionsService;
     }
 
     @GetMapping
-    public String show(){
+    public String show(Model model){
+        List<City> cities = optionsService.getOptions();
+        System.out.println(cities);
+        model.addAttribute("cities", cities);
         return "search";
     }
 

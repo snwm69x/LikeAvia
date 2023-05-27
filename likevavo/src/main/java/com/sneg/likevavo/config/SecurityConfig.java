@@ -25,9 +25,8 @@ public class SecurityConfig extends WebSecurityConfiguration {
     protected void configure(HttpSecurity http) throws Exception {
        http.authorizeHttpRequests()
                 .requestMatchers("/hello").hasRole("ADMIN")
-                .requestMatchers("/search").hasRole("USER")
+                .requestMatchers("/lk", "/book-ticket").authenticated()
                 .requestMatchers("/login", "/registration").permitAll()
-                .anyRequest().hasAnyRole("USER", "ADMIN")
                 .and()
                 .formLogin(login -> login
                         .loginPage("/login")
@@ -36,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login"))
-                ;
+                ; 
     }
     // Настройка аутентификации
     @Autowired

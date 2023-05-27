@@ -1,5 +1,7 @@
 package com.sneg.likevavo.entities;
 
+import java.util.Optional;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -49,24 +51,24 @@ public class Booking {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Optional<User> user) {
+        this.user = user.orElse(null);
     }
 
     public Ticket getTicket() {
         return ticket;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+    public void setTicket(Optional<Ticket> ticket) {
+        this.ticket = ticket.orElse(null);
     }
 
     public Passenger getPassenger() {
         return passenger;
     }
 
-    public void setPassenger(Passenger passenger) {
-        this.passenger = passenger;
+    public void setPassenger(Optional<Passenger> passenger) {
+        this.passenger = passenger.orElse(null);
     }
 
     public Integer getQuantity() {

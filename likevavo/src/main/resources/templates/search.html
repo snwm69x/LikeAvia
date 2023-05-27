@@ -85,15 +85,15 @@
     <form method="post" th:action="@{/search}" onsubmit="return validateForm()">
         <label for="originAirportCity">Origin City:</label>
         <input type="text" id="originCity" name="originCity" required list="originCities">
-        <!-- <datalist id="originCities">
-            <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
-        </datalist> -->
+        <datalist id="originCities">
+            <option th:each="city : ${cities}" th:value="${city.getName()}" th:text="${city.getName()}"></option>
+        </datalist>
         
         <label for="destinationAirportCity">Destination City:</label>
         <input type="text" id="destinationCity" name="destinationCity" required list="destinationCities">
-        <!-- <datalist id="destinationCities">
-            <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
-        </datalist> -->
+        <datalist id="destinationCities">
+            <option th:each="city : ${cities}" th:value="${city.getName()}" th:text="${city.getName()}"></option>
+        </datalist>
         <label for="date">Date:</label>
         <input type="date" id="date" name="date">
         <button type="submit">Search</button>
