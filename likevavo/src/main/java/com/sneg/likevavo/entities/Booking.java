@@ -51,8 +51,8 @@ public class Booking {
         return user;
     }
 
-    public void setUser(Optional<User> user) {
-        this.user = user.orElse(null);
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Ticket getTicket() {

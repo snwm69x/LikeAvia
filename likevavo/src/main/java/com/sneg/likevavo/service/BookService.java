@@ -18,19 +18,16 @@ public class BookService {
     private final BookingRepository bookingRepository;
     private final TicketRepository ticketRepository;
     private final PassengerRepository passengerRepository;
-    private final UserRepository userRepository;
 
     public BookService(BookingRepository bookingRepository, TicketRepository ticketRepository, PassengerRepository passengerRepository, UserRepository userRepository) {
         this.bookingRepository = bookingRepository;
         this.ticketRepository = ticketRepository;
         this.passengerRepository = passengerRepository;
-        this.userRepository = userRepository;
     }
 
-    public void book(Long userid, long ticketid){
+    public void book(User user, long ticketid){
         Optional<Passenger> passenger = passengerRepository.findById(1L);
         Optional<Ticket> ticket = ticketRepository.findById(ticketid);
-        Optional<User> user = userRepository.findById(userid);
         Booking booking = new Booking();
         booking.setQuantity(1);
         booking.setPassenger(passenger);

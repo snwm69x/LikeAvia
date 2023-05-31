@@ -1,4 +1,5 @@
 package com.sneg.likevavo.entities;
+
 import jakarta.persistence.*;
 
 @Entity
