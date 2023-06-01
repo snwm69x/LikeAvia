@@ -13,7 +13,7 @@ import com.sneg.likevavo.entities.User;
 import com.sneg.likevavo.service.RegistrationService;
 import com.sneg.likevavo.util.UserValidator;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping

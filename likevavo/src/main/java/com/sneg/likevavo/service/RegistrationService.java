@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.sneg.likevavo.entities.User;
 import com.sneg.likevavo.repository.UserRepository;
 
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 @Service
 public class RegistrationService {

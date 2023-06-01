@@ -2,7 +2,7 @@ package com.sneg.likevavo.entities;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tickets")

@@ -2,7 +2,7 @@ package com.sneg.likevavo.entities;
 
 import java.util.Optional;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "bookings")

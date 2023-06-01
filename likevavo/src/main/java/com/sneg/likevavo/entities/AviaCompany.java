@@ -1,6 +1,6 @@
 package com.sneg.likevavo.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "avia_companies")
