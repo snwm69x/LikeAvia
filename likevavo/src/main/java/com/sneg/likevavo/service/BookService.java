@@ -29,10 +29,23 @@ public class BookService {
         Optional<Passenger> passenger = passengerRepository.findById(1L);
         Optional<Ticket> ticket = ticketRepository.findById(ticketid);
         Booking booking = new Booking();
-        booking.setQuantity(1);
-        booking.setPassenger(passenger);
+        booking.setQuantity((Integer) 1);
+        if(!passenger.isPresent()){
+            throw new RuntimeException("Passenger not found");
+        }
+        else {
+            Passenger passenger1 = passenger.orElseThrow(() -> new RuntimeException("Passenger not found"));
+            booking.setPassenger(passenger1);
+        }
         booking.setUser(user);
-        booking.setTicket(ticket);
+        if(!ticket.isPresent()){
+            throw new RuntimeException("Ticket not found");
+        }
+        else {
+            Ticket ticket1 = ticket.orElseThrow(() -> new RuntimeException("Ticket not found"));
+            booking.setTicket(ticket1);
+        }
         bookingRepository.save(booking);
     }
+
 }

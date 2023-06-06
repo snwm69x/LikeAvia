@@ -3,7 +3,7 @@ package com.sneg.likevavo.controller;
 import java.time.LocalDate;
 import java.util.List;
 
-
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +38,10 @@ public class SearchController {
     }
 
     @PostMapping
-    public String search(Model model, @ModelAttribute("destinationCity") String destinationCity, @ModelAttribute("originCity") String originCity, @ModelAttribute("date") LocalDate date) {
+    public String search(Model model, 
+                         @ModelAttribute("destinationCity") String destinationCity, 
+                         @ModelAttribute("originCity") String originCity, 
+                         @ModelAttribute("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         List<Ticket> tickets = searchService.search(originCity, destinationCity, date);
         System.out.println(tickets.get(0).getId());
         model.addAttribute("tickets", tickets);

@@ -10,10 +10,10 @@ public class Passenger {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "isAdult", nullable = false)
+    @Column(name = "isadult", nullable = false)
     private boolean isAdult;
     
-    @Column(name = "isChild", nullable = false)
+    @Column(name = "ischild", nullable = false)
     private boolean isChild;
     
     @ManyToOne(fetch = FetchType.LAZY)
