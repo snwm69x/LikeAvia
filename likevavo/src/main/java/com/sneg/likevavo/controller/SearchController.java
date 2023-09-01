@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sneg.likevavo.entities.City;
 import com.sneg.likevavo.entities.Ticket;
-import com.sneg.likevavo.service.OptionsService;
-import com.sneg.likevavo.service.SearchService;
+import com.sneg.likevavo.service_impl.OptionsServiceImpl;
+import com.sneg.likevavo.service_impl.SearchServiceImpl;
 
 
 @Controller
 @RequestMapping("/search")
 public class SearchController {
     
-    private final SearchService searchService;
-    private final OptionsService optionsService;
+    private final SearchServiceImpl searchService;
+    private final OptionsServiceImpl optionsService;
 
-    public SearchController(SearchService searchService, OptionsService optionsService) {
+    public SearchController(SearchServiceImpl searchService, OptionsServiceImpl optionsService) {
         this.searchService = searchService;
         this.optionsService = optionsService;
     }

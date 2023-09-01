@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.sneg.likevavo.entities.User;
-import com.sneg.likevavo.service.UserDetailsServiceImpl;
+import com.sneg.likevavo.service_impl.UserDetailsServiceImpl;
 
 @Component
 public class UserValidator implements Validator {

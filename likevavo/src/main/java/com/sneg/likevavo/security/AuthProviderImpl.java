@@ -10,8 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-
-import com.sneg.likevavo.service.UserDetailsServiceImpl;
+import com.sneg.likevavo.service_impl.UserDetailsServiceImpl;
 
 @Component
 public class AuthProviderImpl implements AuthenticationProvider {
@@ -30,6 +29,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
         UserDetails UserDetails = UserDetailsService.loadUserByUsername(username);
         String pass = authentication.getCredentials().toString();
         String encodedpass = passwordEncoder.encode(pass);
+        System.out.println(encodedpass);
         if(encodedpass.equals(UserDetails.getPassword())){
             throw new BadCredentialsException("Wrong password");
         }

@@ -1,4 +1,4 @@
-package com.sneg.likevavo.service;
+package com.sneg.likevavo.service_impl;
 
 import java.util.Optional;
 
