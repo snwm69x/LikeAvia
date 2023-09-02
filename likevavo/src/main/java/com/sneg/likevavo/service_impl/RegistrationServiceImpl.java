@@ -20,6 +20,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Override
     @Transactional
     public void register(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));

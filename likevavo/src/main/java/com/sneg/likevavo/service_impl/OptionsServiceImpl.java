@@ -17,7 +17,7 @@ public class OptionsServiceImpl implements OptionService {
         this.cityRepository = cityRepository;
     }
 
-
+    @Override
     public List<City> getOptions() {
         return cityRepository.findAll();
     }

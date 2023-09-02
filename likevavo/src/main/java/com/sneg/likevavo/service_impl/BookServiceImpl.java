@@ -14,7 +14,7 @@ import com.sneg.likevavo.repository.TicketRepository;
 import com.sneg.likevavo.repository.UserRepository;
 import com.sneg.likevavo.service.BookService;
 
-@Service
+@Service("bookService")
 public class BookServiceImpl implements BookService {
     private final BookingRepository bookingRepository;
     private final TicketRepository ticketRepository;
@@ -26,6 +26,7 @@ public class BookServiceImpl implements BookService {
         this.passengerRepository = passengerRepository;
     }
 
+    @Override
     public void book(User user, long ticketid){
         Optional<Passenger> passenger = passengerRepository.findById(1L);
         Optional<Ticket> ticket = ticketRepository.findById(ticketid);

@@ -17,6 +17,7 @@ public class SearchServiceImpl implements SearchService {
         this.routeRepository = routeRepository;
     }
 
+    @Override
     public List<Ticket> search(String from, String to, LocalDate date) {
         return routeRepository.findByOriginCityNameAndDestinationCityNameAndRouteDate(from, to, date);
     }
