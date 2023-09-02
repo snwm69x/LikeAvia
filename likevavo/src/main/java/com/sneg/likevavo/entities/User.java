@@ -1,6 +1,9 @@
 package com.sneg.likevavo.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+
 import lombok.AllArgsConstructor;
 
 @Entity
@@ -13,19 +16,23 @@ public class User {
     private Long id;
     
     @Column(name = "username", nullable = false, length = 50)
+    @Pattern(regexp = "^[a-zA-Z0-9_-]{3,15}$", message = "Username must be between 3 and 15 characters long and can only contain letters, numbers, underscores, and hyphens")
     private String username;
     
     @Column(name = "email", nullable = false, length = 100)
+    @Email(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "Invalid email format")
     private String email;
     
     @Column(name = "password", nullable = false, length = 300)
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "Password must be at least 8 characters long and contain at least one letter and one number")
     private String password;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role roleclass;
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "role_id", nullable = false)
+    // private Role roleclass;
 
     @Column(name = "role", length = 100)
+    @Pattern(regexp = "^(ROLE_USER|ROLE_ADMIN)$", message = "Role must be either ROLE_USER or ROLE_ADMIN")
     private String role;
     // @ManyToOne
     // @JoinColumn(name = "role_id", referencedColumnName = "id")
@@ -33,11 +40,11 @@ public class User {
     
     public User() {}
     
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, String role) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.role = null;
+        this.role = role;
     }
     
     
