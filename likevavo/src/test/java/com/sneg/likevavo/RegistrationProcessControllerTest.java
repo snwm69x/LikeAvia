@@ -98,6 +98,7 @@ public class RegistrationProcessControllerTest {
 
         Optional<User> user2 = userRepository.findByUsername("user@name"); 
         assertFalse(user2.isPresent());
+        System.out.println("Registration.testUsernameValidation()" + " passed");
     }
     
     @Test

@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-LikevavoApplication<likevavo>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.sneg.likevavo.LikevavoApplication",
+            "projectName": "likevavo",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

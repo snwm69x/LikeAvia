@@ -33,7 +33,7 @@ class LikevavoApplicationTests {
 		for (String bean : beans) {
 			if(applicationContext.containsBean(bean)) {
 				beansSize--;
-				System.out.println("Bean " + bean + " working fine");
+				// System.out.println("Bean " + bean + " working fine");
 			} else {
 				System.out.println("Bean " + bean + " not found");
 			}
