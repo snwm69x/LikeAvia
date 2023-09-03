@@ -20,6 +20,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -135,6 +137,8 @@ public class RegistrationProcessControllerTest {
         Optional<User> user2 = userRepository.findByUsername("testuser" + count2); 
         assertTrue(user2.isPresent());
     }
+
+    
 }
     
 
