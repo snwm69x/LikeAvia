@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.sneg.likevavo.entities.User;
 import com.sneg.likevavo.security.UserDetailsImpl;
-import com.sneg.likevavo.service.BookService;
+import com.sneg.likevavo.service_impl.BookServiceImpl;
 
 @Controller
 @RequestMapping("/book-ticket")
 public class BookTicketController {
 
-    private final BookService bookService;
+    private final BookServiceImpl bookService;
 
-    public BookTicketController(BookService bookService) {
+    public BookTicketController(BookServiceImpl bookService) {
         this.bookService = bookService;
     }
 

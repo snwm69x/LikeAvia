@@ -3,7 +3,7 @@ package com.sneg.likevavo.controller;
 import java.time.LocalDate;
 import java.util.List;
 
-
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sneg.likevavo.entities.City;
 import com.sneg.likevavo.entities.Ticket;
-import com.sneg.likevavo.service.OptionsService;
-import com.sneg.likevavo.service.SearchService;
+import com.sneg.likevavo.service_impl.OptionsServiceImpl;
+import com.sneg.likevavo.service_impl.SearchServiceImpl;
 
 
 @Controller
 @RequestMapping("/search")
 public class SearchController {
     
-    private final SearchService searchService;
-    private final OptionsService optionsService;
+    private final SearchServiceImpl searchService;
+    private final OptionsServiceImpl optionsService;
 
-    public SearchController(SearchService searchService, OptionsService optionsService) {
+    public SearchController(SearchServiceImpl searchService, OptionsServiceImpl optionsService) {
         this.searchService = searchService;
         this.optionsService = optionsService;
     }
@@ -38,7 +38,10 @@ public class SearchController {
     }
 
     @PostMapping
-    public String search(Model model, @ModelAttribute("destinationCity") String destinationCity, @ModelAttribute("originCity") String originCity, @ModelAttribute("date") LocalDate date) {
+    public String search(Model model, 
+                         @ModelAttribute("destinationCity") String destinationCity, 
+                         @ModelAttribute("originCity") String originCity, 
+                         @ModelAttribute("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         List<Ticket> tickets = searchService.search(originCity, destinationCity, date);
         System.out.println(tickets.get(0).getId());
         model.addAttribute("tickets", tickets);

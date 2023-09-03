@@ -1,6 +1,6 @@
 package com.sneg.likevavo.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "passengers")
@@ -10,10 +10,10 @@ public class Passenger {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "isAdult", nullable = false)
+    @Column(name = "isadult", nullable = false)
     private boolean isAdult;
     
-    @Column(name = "isChild", nullable = false)
+    @Column(name = "ischild", nullable = false)
     private boolean isChild;
     
     @ManyToOne(fetch = FetchType.LAZY)

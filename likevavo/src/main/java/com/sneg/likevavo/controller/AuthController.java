@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sneg.likevavo.entities.User;
-import com.sneg.likevavo.service.RegistrationService;
+import com.sneg.likevavo.service_impl.RegistrationServiceImpl;
 import com.sneg.likevavo.util.UserValidator;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping
 public class AuthController {
 
     private final UserValidator userValidator;
-    private final RegistrationService registrationService;
+    private final RegistrationServiceImpl registrationService;
 
-    public AuthController(UserValidator userValidator, RegistrationService registrationService) {
+    public AuthController(UserValidator userValidator, RegistrationServiceImpl registrationService) {
         this.userValidator = userValidator;
         this.registrationService = registrationService;
     }
