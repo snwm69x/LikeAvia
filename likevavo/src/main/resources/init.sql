@@ -1,16 +1,16 @@
-CREATE TABLE roles IF NOT EXISTS (
+CREATE TABLE roles (
     id SERIAL PRIMARY KEY,
     name VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE class IF NOT EXISTS (
+CREATE TABLE class (
     id SERIAL PRIMARY KEY,
     economy BOOLEAN NOT NULL,
     business BOOLEAN NOT NULL,
     firstclass BOOLEAN NOT NULL
 );
 
-CREATE TABLE country IF NOT EXISTS (
+CREATE TABLE country (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     translation_ru VARCHAR(100) NOT NULL
@@ -29,7 +29,7 @@ INSERT INTO country (name, translation_ru, code) VALUES
 ('China', 'Китай', 'CHN'),
 ('Japan', 'Япония', 'JPN');
 
-CREATE TABLE users IF NOT EXISTS (
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -37,14 +37,14 @@ CREATE TABLE users IF NOT EXISTS (
     role VARCHAR(100)
 );
 
-CREATE TABLE passengers IF NOT EXISTS (
+CREATE TABLE passengers (
     id SERIAL PRIMARY KEY,
     isAdult BOOLEAN NOT NULL,
     isChild BOOLEAN NOT NULL,
     class INTEGER NOT NULL REFERENCES class(id)
 );
 
-CREATE TABLE users IF NOT EXISTS (
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE users IF NOT EXISTS (
     personal_data_id INTEGER REFERENCES personal_data(id)
 );
 
-CREATE TABLE city IF NOT EXISTS (
+CREATE TABLE city (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     code VARCHAR(50) NOT NULL,
@@ -97,7 +97,7 @@ INSERT INTO city (name, code, translation_ru, country_id) VALUES
 -- INSERT INTO users (username, email, password, role_id, personal_data_id)
 -- VALUES ('kolbasa', 'kolbasa@mail.ru', '$2a$10$qUThjoYdXTO9XqEfWclY4uBNn5mFqomNagNHPjjKAKOJEjslR1fXe', 1, 1);
 
-CREATE TABLE personal_data IF NOT EXISTS (
+CREATE TABLE personal_data (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE personal_data IF NOT EXISTS (
 INSERT INTO personal_data (first_name, last_name, phone_number, country_id)
 VALUES ('Иван', 'Иванов', '+7 (999) 123-45-67', 1);
 
-CREATE TABLE routes IF NOT EXISTS (
+CREATE TABLE routes (
     id SERIAL PRIMARY KEY,
     origin_airport_id INTEGER NOT NULL REFERENCES airports(id),
     destination_airport_id INTEGER NOT NULL REFERENCES airports(id),
@@ -120,8 +120,32 @@ CREATE TABLE routes IF NOT EXISTS (
 INSERT INTO routes(origin_airport_id, destination_airport_id, date, origin_city_id, destination_city_id) VALUES
 (1,2,'2022-04-04',1,2);
 
+INSERT INTO routes (origin_airport_id, destination_airport_id, date, origin_city_id, destination_city_id)
+VALUES (1, 2, '2023-11-11', 1, 2);
 
-CREATE TABLE tickets IF NOT EXISTS (
+-- SELECT *
+-- FROM routes
+-- WHERE origin_city_id = (
+--     SELECT id
+--     FROM city
+--     WHERE name = 'New York'
+-- )
+--     AND destination_city_id = (
+--     SELECT id
+--     FROM city
+--     WHERE name = 'Los Angeles'
+-- )
+--     AND date = '2023-11-11';
+
+-- SELECT r.*
+-- FROM routes r
+-- JOIN city origin ON r.origin_city_id = origin.id
+-- JOIN city destination ON r.destination_city_id = destination.id
+-- WHERE origin.name = 'New York'
+--     AND destination.name = 'Los Angeles'
+--     AND r.date = '2023-11-11';
+
+CREATE TABLE tickets (
     id SERIAL PRIMARY KEY,
     route_id INTEGER NOT NULL REFERENCES routes(id),
     avia_company_id INTEGER NOT NULL REFERENCES avia_companies(id),
@@ -131,7 +155,10 @@ CREATE TABLE tickets IF NOT EXISTS (
     duration_flight VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE airports IF NOT EXISTS (
+INSERT INTO tickets (route_id, avia_company_id, price, departure_time, arrival_time, duration_flight)
+VALUES (1, 1, 250.00, '2022-04-04 08:00:00', '2022-04-04 10:30:00', '2h 30m');
+
+CREATE TABLE airports (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     city_id INTEGER NOT NULL REFERENCES city(id),
@@ -170,7 +197,7 @@ INSERT INTO airports (name, city_id, country_id, code) VALUES
 
 CREATE INDEX idx_airports_name ON airports (name);
 
-CREATE TABLE avia_companies IF NOT EXISTS (
+CREATE TABLE avia_companies (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     country_id INTEGER NOT NULL REFERENCES country(id)
@@ -207,11 +234,11 @@ INSERT INTO avia_companies (name, country_id) VALUES
 
 CREATE INDEX idx_avia_companies_name ON avia_companies (name);
 
-CREATE TABLE bookings IF NOT EXISTS (
+CREATE TABLE bookings (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id),
     ticket_id INTEGER NOT NULL REFERENCES tickets(id),
-    passengers_id INTEGER NOT NULL REFERENCES passengers(id),
+    passengers_id INTEGER REFERENCES passengers(id),
     quantity INTEGER NOT NULL
 );
 

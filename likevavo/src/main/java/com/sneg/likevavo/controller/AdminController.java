@@ -11,7 +11,7 @@ import com.sneg.likevavo.security.UserDetailsImpl;
 
 @RestController
 @RequestMapping
-public class HelloController {
+public class AdminController {
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/hello")
