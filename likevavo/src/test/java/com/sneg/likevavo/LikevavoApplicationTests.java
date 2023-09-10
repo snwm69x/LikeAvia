@@ -13,7 +13,7 @@ import com.sneg.likevavo.config.BeanTestConfig;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class LikevavoApplicationTests {
+public class LikevavoApplicationTests {
 
 	@Autowired
 	private ApplicationContext applicationContext;
